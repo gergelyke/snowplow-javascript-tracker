@@ -20,3 +20,5 @@ node_modules
 
 # creds for Grunt
 aws.json
+dist
+src/js/lib/lodash.js

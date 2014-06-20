@@ -78,6 +78,8 @@
 		tracker = require('./tracker'),
 		helpers = require('./lib/helpers'),
 		queue = require('./queue'),
+    config = require('./config.json'),
+    namespace = config.namespace,
 
 		object = typeof exports !== 'undefined' ? exports : this; // For eventual node.js environment support
 
@@ -203,7 +205,11 @@
 		asyncTracker = new tracker.Tracker(version, mutSnowplowState); // No argmap
 
 		// Now replace initialization array with proxy object
-		windowAlias._snaq = new queue.AsyncQueueProxy(asyncTracker, windowAlias._snaq);
+    if (namespace) {
+      windowAlias[namespace]._snaq = new queue.AsyncQueueProxy(asyncTracker, windowAlias[namespace]._snaq);
+    } else {
+      windowAlias._snaq = new queue.AsyncQueueProxy(asyncTracker, windowAlias._snaq);
+    }
 
 		/************************************************************
 		 * Public data and methods

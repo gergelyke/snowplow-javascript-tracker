@@ -167,9 +167,9 @@ module.exports = function(grunt) {
           {
             src: 'dist/sp.js',
             dest: '<%= pkg.pinnedVersion %>/sp.js'
-          }        
+          }
         ]
-      },  
+      }
     });
 
     grunt.config('invalidate_cloudfront', {

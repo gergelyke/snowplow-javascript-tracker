@@ -32,8 +32,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+var config = require('./config.json');
+var namespace = config.namespace;
+
 // Snowplow Asynchronous Queue
-window._snaq = window._snaq || [];
+if (namespace) {
+  window[namespace]._snaq = window[namespace]._snaq || [];
+} else {
+  window._snaq = window._snaq || [];
+}
 
 var snowplow = require('./snowplow');
-window.Snowplow = window.Snowplow || new snowplow.Snowplow();
+window[namespace].Snowplow = window[namespace].Snowplow || new snowplow.Snowplow();
